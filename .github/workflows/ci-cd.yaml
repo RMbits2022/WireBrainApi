@@ -23,6 +23,17 @@ jobs:
     - id: build
       name: Build      
       run: dotnet build --no-restore
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
 
     - id: test
       if: steps.build.outcome == 'success'
